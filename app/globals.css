@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #111111;
+  --color-bg-tertiary: #1a1614;
+  --color-text-primary: #ebe5d6;
+  --color-text-muted: #8a8378;
+  --color-text-dim: #55504a;
+  --color-accent: #8b2e1f;
+  --color-accent-hover: #a8371f;
+  --color-rule: rgba(235, 229, 214, 0.12);
+  --color-rule-strong: rgba(235, 229, 214, 0.22);
+
+  --font-serif: var(--font-serif-var), "Georgia", "Times New Roman", serif;
+  --font-sans: var(--font-sans-var), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono-var), "Courier New", monospace;
+  --font-display: var(--font-serif-var), "Georgia", "Times New Roman", serif;
+  --font-body: var(--font-sans-var), system-ui, -apple-system, sans-serif;
+
+  --text-display-sm: clamp(2.5rem, 6vw, 5rem);
+  --text-display-md: clamp(3.5rem, 10vw, 8rem);
+  --text-display-lg: clamp(4.5rem, 13vw, 12rem);
+  --text-display-xl: clamp(5.5rem, 16vw, 16rem);
+
+  --tracking-tightest: -0.05em;
+  --tracking-extra-tight: -0.03em;
+
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-smooth-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    overscroll-behavior: none;
+  }
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-text-primary);
+  }
+  ::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility container-x {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  @media (min-width: 768px) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  @media (min-width: 1024px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@utility clip-top {
+  clip-path: inset(0 0 100% 0);
+}
+
+@utility clip-reveal {
+  clip-path: inset(0 0 0 0);
+}
+
+@utility rule-x {
+  border-top: 1px solid var(--color-rule);
+}
+
+@utility serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
