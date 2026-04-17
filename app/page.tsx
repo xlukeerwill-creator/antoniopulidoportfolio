@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import Index from "@/components/sections/Index";
@@ -13,9 +13,9 @@ let preloaderShownThisSession = false;
 
 export default function Home() {
   const [phase, setPhase] = useState<"pending" | "preloader" | "post-preloader" | "returning">("pending");
+  const mainRef = useRef<HTMLElement>(null);
 
   useIsoLayoutEffect(() => {
-    // Si venimos con hash #index en la URL, scroll inmediato antes del primer paint
     if (typeof window !== "undefined" && window.location.hash === "#index") {
       document.documentElement.style.scrollBehavior = "auto";
       requestAnimationFrame(() => {
@@ -33,13 +33,27 @@ export default function Home() {
     }
   }, []);
 
+  useIsoLayoutEffect(() => {
+    if (phase === "returning" && mainRef.current) {
+      import("@/lib/gsap").then(({ gsap }) => {
+        if (mainRef.current) {
+          gsap.fromTo(
+            mainRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.4, ease: "power2.out" }
+          );
+        }
+      });
+    }
+  }, [phase]);
+
   const handlePreloaderComplete = () => {
     preloaderShownThisSession = true;
     setPhase("post-preloader");
   };
 
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary">
+    <main ref={mainRef} className="min-h-screen bg-bg-primary text-text-primary">
       {phase === "preloader" && <Preloader onComplete={handlePreloaderComplete} />}
       {phase !== "pending" && phase !== "preloader" && (
         <>

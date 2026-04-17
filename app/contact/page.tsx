@@ -11,12 +11,18 @@ export default function ContactPage() {
   useIsomorphicLayoutEffect(() => {
     if (!pageRef.current) return;
     const ctx = gsap.context(() => {
+      gsap.fromTo(
+        pageRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4, ease: "power2.out" }
+      );
       gsap.from("[data-contact-el]", {
         opacity: 0,
         y: 30,
         duration: 0.8,
         stagger: 0.1,
         ease: "power3.out",
+        delay: 0.15,
       });
     }, pageRef);
     return () => ctx.revert();
