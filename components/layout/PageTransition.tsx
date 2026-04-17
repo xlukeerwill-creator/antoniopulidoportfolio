@@ -46,6 +46,18 @@ export default function PageTransition({ children }: { children: ReactNode }) {
         onComplete: () => {
           router.push(href);
           setTimeout(() => {
+            // Hash scroll while curtain covers — user sees no jump
+            const hashIndex = href.indexOf("#");
+            if (hashIndex !== -1) {
+              const id = href.substring(hashIndex + 1);
+              const target = document.getElementById(id);
+              if (target) {
+                target.scrollIntoView({ behavior: "auto", block: "start" });
+              }
+            } else {
+              window.scrollTo({ top: 0, behavior: "auto" });
+            }
+
             gsap.to(curtain, {
               yPercent: -100,
               duration: 0.45,

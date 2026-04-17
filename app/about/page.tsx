@@ -27,7 +27,7 @@ export default function AboutPage() {
       <BackToIndex />
       <main
         ref={pageRef}
-        className="min-h-screen bg-bg-primary text-text-primary container-x pt-24 md:pt-32 pb-20"
+        className="min-h-screen bg-bg-primary text-text-primary container-x pt-20 md:pt-24 pb-20"
       >
         <div
           className="grid grid-cols-2 items-baseline pb-4 border-b border-rule mb-16 md:mb-24"
