@@ -93,7 +93,7 @@ export default function Hero({ startAnimation }: HeroProps) {
       {/* CAMBIO 2: cabecera compacta con shrink-0 */}
       <div className="grid grid-cols-2 items-center pb-4 border-b border-rule shrink-0">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted">
-          A. Pulido Saez — Portfolio
+          A. Pulido Sáez — Portfolio
         </p>
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted text-right">
           Washington D.C. · MMXXVI
@@ -119,7 +119,7 @@ export default function Hero({ startAnimation }: HeroProps) {
             </div>
             <div className="overflow-hidden">
               <span className="inline-block italic text-accent" data-hero-line>
-                Saez.
+                Sáez.
               </span>
             </div>
           </div>
@@ -181,7 +181,7 @@ export default function Hero({ startAnimation }: HeroProps) {
             >
               <Image
                 src="/images/antonio-hero.png"
-                alt="Antonio Pulido Saez"
+                alt="Antonio Pulido Sáez"
                 fill
                 priority
                 sizes="(max-width: 1024px) 70vw, 400px"

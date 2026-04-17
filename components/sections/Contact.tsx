@@ -135,7 +135,7 @@ export default function Contact() {
 
       <footer className="grid grid-cols-2 items-baseline pt-8 border-t border-rule">
         <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim">
-          © MMXXVI — A. Pulido Saez
+          © MMXXVI — A. Pulido Sáez
         </p>
         <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim text-right">
           Designed & built with care

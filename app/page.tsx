@@ -8,29 +8,31 @@ const Preloader = dynamic(() => import("@/components/preloader/Preloader"), {
   ssr: false,
 });
 
-const SESSION_KEY = "aps_preloader_seen";
+const SESSION_KEY = "aps_preloader_seen_v2";
 
 export default function Home() {
-  const [showPreloader, setShowPreloader] = useState<boolean | null>(null);
+  const [preloaderState, setPreloaderState] = useState<
+    "checking" | "show" | "skip"
+  >("checking");
 
   useEffect(() => {
-    const alreadySeen =
-      typeof window !== "undefined" &&
-      sessionStorage.getItem(SESSION_KEY) === "1";
-    setShowPreloader(!alreadySeen);
+    const alreadySeen = sessionStorage.getItem(SESSION_KEY) === "1";
+    setPreloaderState(alreadySeen ? "skip" : "show");
   }, []);
 
   const handlePreloaderComplete = () => {
     sessionStorage.setItem(SESSION_KEY, "1");
-    setShowPreloader(false);
+    setPreloaderState("skip");
   };
+
+  const shouldAnimateHero = preloaderState === "skip";
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
-      {showPreloader === true && (
+      {preloaderState === "show" && (
         <Preloader onComplete={handlePreloaderComplete} />
       )}
-      <Hero startAnimation={showPreloader === false} />
+      <Hero startAnimation={shouldAnimateHero} />
       <Index />
     </main>
   );

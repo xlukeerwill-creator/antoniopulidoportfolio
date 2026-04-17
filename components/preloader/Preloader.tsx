@@ -231,7 +231,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         ref={topMetaRef}
         className="absolute top-6 left-6 md:top-8 md:left-10 z-40 font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted"
       >
-        A. Pulido Saez — Portfolio
+        A. Pulido Sáez — Portfolio
       </div>
 
       {/* Top-right: year */}

@@ -5,7 +5,7 @@ import PageTransition from "@/components/layout/PageTransition";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Antonio Pulido Saez — Portfolio",
+  title: "Antonio Pulido Sáez — Portfolio",
   description:
     "Spanish lawyer based in Washington D.C. Bridging law, business and technology.",
 };

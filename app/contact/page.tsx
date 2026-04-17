@@ -130,7 +130,7 @@ export default function ContactPage() {
           data-contact-el
         >
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim">
-            © MMXXVI — A. Pulido Saez
+            © MMXXVI — A. Pulido Sáez
           </p>
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim text-right">
             Designed & built with care
