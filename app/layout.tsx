@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { instrumentSerif, geist, geistMono } from "./fonts";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import PageTransition from "@/components/layout/PageTransition";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${geist.variable} ${geistMono.variable}`}
     >
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <PageTransition>{children}</PageTransition>
+        </SmoothScroll>
       </body>
     </html>
   );
