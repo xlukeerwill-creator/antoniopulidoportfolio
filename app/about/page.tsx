@@ -8,24 +8,19 @@ export default function AboutPage() {
   const pageRef = useRef<HTMLElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (!pageRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        pageRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.4, ease: "power2.out" }
-      );
-      gsap.from("[data-about-el]", {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.08,
-        ease: "power3.out",
-        delay: 0.15,
-      });
-    }, pageRef);
-    return () => ctx.revert();
-  }, []);
+  if (!pageRef.current) return;
+  const ctx = gsap.context(() => {
+    gsap.set("[data-about-el]", { opacity: 0, y: 30 });
+    gsap.to("[data-about-el]", {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.08,
+      ease: "power3.out",
+    });
+  }, pageRef);
+  return () => ctx.revert();
+}, []);
 
   return (
     <>

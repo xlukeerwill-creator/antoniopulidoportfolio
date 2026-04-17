@@ -177,7 +177,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 bg-bg-primary flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[200] bg-bg-primary flex items-center justify-center overflow-hidden"
     >
       {/* Curtain panels */}
       <div
