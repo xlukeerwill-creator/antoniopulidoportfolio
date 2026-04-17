@@ -13,11 +13,10 @@ export default function ContactPage() {
     const ctx = gsap.context(() => {
       gsap.from("[data-contact-el]", {
         opacity: 0,
-        y: 40,
-        duration: 1,
+        y: 30,
+        duration: 0.8,
         stagger: 0.1,
         ease: "power3.out",
-        delay: 0.3,
       });
     }, pageRef);
     return () => ctx.revert();
@@ -57,7 +56,7 @@ export default function ContactPage() {
           </Marquee>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-24 items-end mb-16 md:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-24 items-end mb-auto">
           <div className="flex flex-col gap-6" data-contact-el>
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-text-muted">
               Drop me a line

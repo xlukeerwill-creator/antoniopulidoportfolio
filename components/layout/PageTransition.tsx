@@ -70,7 +70,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
             window.scrollTo({ top: 0, behavior: "auto" });
             finishTransition();
           }
-        }, 550);
+        }, 400);
       },
     });
   };

@@ -12,11 +12,10 @@ export default function AboutPage() {
     const ctx = gsap.context(() => {
       gsap.from("[data-about-el]", {
         opacity: 0,
-        y: 40,
-        duration: 1,
-        stagger: 0.12,
+        y: 30,
+        duration: 0.8,
+        stagger: 0.08,
         ease: "power3.out",
-        delay: 0.3,
       });
     }, pageRef);
     return () => ctx.revert();
