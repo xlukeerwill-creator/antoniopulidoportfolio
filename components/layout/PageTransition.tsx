@@ -3,12 +3,10 @@
 import {
   createContext,
   useContext,
-  useEffect,
-  useRef,
   useState,
   ReactNode,
 } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type TransitionContextType = {
   transitionTo: (href: string) => void;
@@ -25,68 +23,21 @@ export const useTransition = () => {
 
 export default function PageTransition({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const pathname = usePathname();
-
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const pendingScrollRef = useRef<
-    { type: "top" } | { type: "hash"; id: string } | null
-  >(null);
-
-  useEffect(() => {
-    // 🔥 reactiva interacción
-    document.body.style.pointerEvents = "auto";
-
-    setIsTransitioning(false);
-
-    const pending = pendingScrollRef.current;
-    if (!pending) return;
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (pending.type === "hash") {
-          const target = document.getElementById(pending.id);
-          if (target) {
-            target.scrollIntoView({ behavior: "auto", block: "start" });
-          } else {
-            window.scrollTo({ top: 0 });
-          }
-        } else {
-          window.scrollTo({ top: 0 });
-        }
-        pendingScrollRef.current = null;
-      });
-    });
-  }, [pathname]);
-
   const transitionTo = (href: string) => {
-    // 🔥 bloquea interacción durante transición
-    document.body.style.pointerEvents = "none";
+    if (isTransitioning) return;
 
     setIsTransitioning(true);
 
-    const hashIndex = href.indexOf("#");
+    // navegación limpia
+    router.push(href);
 
-    if (hashIndex !== -1) {
-      const id = href.substring(hashIndex + 1);
-      const basePath = href.substring(0, hashIndex);
-
-      if (basePath === pathname || basePath === "") {
-        const target = document.getElementById(id);
-        if (target) {
-          target.scrollIntoView({ behavior: "auto", block: "start" });
-        }
-        document.body.style.pointerEvents = "auto";
-        setIsTransitioning(false);
-        return;
-      }
-
-      pendingScrollRef.current = { type: "hash", id };
-      router.push(href);
-    } else {
-      pendingScrollRef.current = { type: "top" };
-      router.push(href);
-    }
+    // reset estado (rápido y fiable)
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      setIsTransitioning(false);
+    }, 300);
   };
 
   return (
@@ -105,16 +56,8 @@ export function TransitionLink({
   href: string;
   children: ReactNode;
   className?: string;
-  [key: string]: any;
 }) {
   const { transitionTo } = useTransition();
-  const router = useRouter();
-
-  const handlePrefetch = () => {
-    const hashIndex = href.indexOf("#");
-    const path = hashIndex !== -1 ? href.substring(0, hashIndex) : href;
-    if (path) router.prefetch(path);
-  };
 
   return (
     <a
@@ -124,8 +67,6 @@ export function TransitionLink({
         e.preventDefault();
         transitionTo(href);
       }}
-      onMouseEnter={handlePrefetch}
-      onFocus={handlePrefetch}
       {...rest}
     >
       {children}
