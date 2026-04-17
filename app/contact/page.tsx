@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import BackToIndex from "@/components/layout/BackToIndex";
+import Marquee from "@/components/ui/Marquee";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap } from "@/lib/gsap";
 
@@ -41,27 +42,19 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div
-          className="relative -mx-6 md:-mx-10 lg:-mx-16 mb-16 md:mb-24 overflow-hidden"
-          data-contact-el
-        >
-          <div
-            className="flex gap-16 whitespace-nowrap font-serif italic text-[clamp(4rem,12vw,12rem)] leading-[0.9] text-text-primary"
-            style={{ animation: "marquee 30s linear infinite" }}
-          >
-            {[...Array(2)].map((_, iteration) => (
-              <div key={iteration} className="flex gap-16 items-center shrink-0">
-                <span>Let&apos;s talk.</span>
-                <span className="text-accent">—</span>
-                <span className="not-italic">Let&apos;s build.</span>
-                <span className="text-accent">—</span>
-                <span>Let&apos;s talk.</span>
-                <span className="text-accent">—</span>
-                <span className="not-italic">Let&apos;s build.</span>
-                <span className="text-accent">—</span>
-              </div>
-            ))}
-          </div>
+        <div className="relative -mx-6 md:-mx-10 lg:-mx-16 mb-16 md:mb-24" data-contact-el>
+          <Marquee speed={80} className="font-serif italic text-[clamp(4rem,12vw,12rem)] leading-[0.9] text-text-primary">
+            <div className="flex gap-16 items-center pr-16">
+              <span>Let&apos;s talk.</span>
+              <span className="text-accent">—</span>
+              <span className="not-italic">Let&apos;s build.</span>
+              <span className="text-accent">—</span>
+              <span>Let&apos;s talk.</span>
+              <span className="text-accent">—</span>
+              <span className="not-italic">Let&apos;s build.</span>
+              <span className="text-accent">—</span>
+            </div>
+          </Marquee>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-24 items-end mb-16 md:mb-24">

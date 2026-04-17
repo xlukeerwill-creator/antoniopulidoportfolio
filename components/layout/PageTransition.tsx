@@ -40,28 +40,37 @@ export default function PageTransition({ children }: { children: ReactNode }) {
 
         setTimeout(() => {
           const hashIndex = href.indexOf("#");
+
+          const finishTransition = () => {
+            requestAnimationFrame(() => {
+              gsap.to(curtain, {
+                yPercent: -100,
+                duration: 0.5,
+                ease: "power3.inOut",
+                onComplete: () => {
+                  gsap.set(curtain, { yPercent: 100 });
+                  isTransitioning.current = false;
+                },
+              });
+            });
+          };
+
           if (hashIndex !== -1) {
             const id = href.substring(hashIndex + 1);
-            const target = document.getElementById(id);
-            if (target) {
-              target.scrollIntoView({ behavior: "auto", block: "start" });
-            } else {
-              window.scrollTo({ top: 0, behavior: "auto" });
-            }
+            requestAnimationFrame(() => {
+              const target = document.getElementById(id);
+              if (target) {
+                target.scrollIntoView({ behavior: "auto", block: "start" });
+              } else {
+                window.scrollTo({ top: 0, behavior: "auto" });
+              }
+              finishTransition();
+            });
           } else {
             window.scrollTo({ top: 0, behavior: "auto" });
+            finishTransition();
           }
-
-          gsap.to(curtain, {
-            yPercent: -100,
-            duration: 0.5,
-            ease: "power3.inOut",
-            onComplete: () => {
-              gsap.set(curtain, { yPercent: 100 });
-              isTransitioning.current = false;
-            },
-          });
-        }, 400);
+        }, 550);
       },
     });
   };
