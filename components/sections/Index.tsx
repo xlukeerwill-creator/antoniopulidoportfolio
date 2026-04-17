@@ -1,5 +1,6 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { TransitionLink } from "@/components/layout/PageTransition";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap } from "@/lib/gsap";
@@ -13,6 +14,14 @@ const entries = [
 
 export default function Index() {
   const sectionRef = useRef<HTMLElement>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/about");
+    router.prefetch("/work");
+    router.prefetch("/thoughts");
+    router.prefetch("/contact");
+  }, [router]);
 
   useIsomorphicLayoutEffect(() => {
     if (!sectionRef.current) return;

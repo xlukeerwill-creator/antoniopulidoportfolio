@@ -57,6 +57,13 @@ export function TransitionLink({
   [key: string]: unknown;
 }) {
   const { transitionTo } = useTransition();
+  const router = useRouter();
+
+  const handlePrefetch = () => {
+    const hashIndex = href.indexOf("#");
+    const path = hashIndex !== -1 ? href.substring(0, hashIndex) : href;
+    if (path) router.prefetch(path);
+  };
 
   return (
     <a
@@ -66,6 +73,8 @@ export function TransitionLink({
         e.preventDefault();
         transitionTo(href);
       }}
+      onMouseEnter={handlePrefetch}
+      onFocus={handlePrefetch}
       {...rest}
     >
       {children}
