@@ -21,8 +21,6 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
         gsap.set("[data-hero-photo]", { opacity: 1, x: 0, scale: 1 });
         gsap.set("[data-hero-tag]", { opacity: 1, y: 0 });
         gsap.set("[data-hero-bio]", { opacity: 1, y: 0 });
-        gsap.set("[data-hero-meta]", { opacity: 1, y: 0 });
-        gsap.set("[data-hero-meta] > *", { opacity: 1, y: 0 });
         gsap.set("[data-hero-scroll]", { opacity: 1, y: 0 });
         return;
       }
@@ -32,8 +30,6 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
       gsap.set("[data-hero-photo]", { opacity: 0, x: 30, scale: 0.96 });
       gsap.set("[data-hero-tag]", { opacity: 0, y: 20 });
       gsap.set("[data-hero-bio]", { opacity: 0, y: 20 });
-      gsap.set("[data-hero-meta]", { opacity: 0, y: 20 });
-      gsap.set("[data-hero-meta] > *", { opacity: 0, y: 15 });
       gsap.set("[data-hero-scroll]", { opacity: 0, y: 10 });
 
       if (!startAnimation) return;
@@ -50,8 +46,6 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
         .to("[data-hero-photo]", { opacity: 1, x: 0, scale: 1, duration: 1.4, ease: "power3.out" }, "-=1.6")
         .to("[data-hero-tag]", { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.9")
         .to("[data-hero-bio]", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
-        .to("[data-hero-meta]", { opacity: 1, y: 0, duration: 0.6 }, "-=0.5")
-        .to("[data-hero-meta] > *", { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power3.out" }, "-=0.5")
         .to("[data-hero-scroll]", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4");
     }, sectionRef);
 
@@ -61,22 +55,22 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen max-h-screen flex flex-col container-x overflow-hidden pt-6 md:pt-8 pb-6 md:pb-8"
+      className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col container-x overflow-hidden pt-6 md:pt-8 pb-8 md:pb-8"
     >
       <div className="grid grid-cols-2 items-center pb-4 border-b border-rule shrink-0">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted">
+        <p className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-text-muted">
           A. Pulido Sáez — Portfolio
         </p>
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted text-right">
+        <p className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-text-muted text-right">
           Washington D.C. · MMXXVI
         </p>
       </div>
 
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-20 items-center pt-6 lg:pt-8">
+      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-20 items-center pt-8 lg:pt-8">
         <div className="flex flex-col gap-5 lg:gap-7">
           <div
             className="flex flex-col font-serif font-normal leading-[0.88]"
-            style={{ fontSize: "clamp(3.5rem, 10.5vw, 9.5rem)" }}
+            style={{ fontSize: "clamp(3rem, 10.5vw, 9.5rem)" }}
           >
             <div className="overflow-hidden">
               <span className="inline-block" data-hero-line>Antonio</span>
@@ -92,7 +86,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
           </div>
 
           <p
-            className="font-serif text-xl md:text-2xl lg:text-3xl text-text-primary max-w-2xl leading-[1.15]"
+            className="font-serif text-lg md:text-2xl lg:text-3xl text-text-primary max-w-2xl leading-[1.2]"
             data-hero-tag
             style={{ opacity: 0 }}
           >
@@ -100,7 +94,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
           </p>
 
           <p
-            className="font-sans text-base text-text-muted max-w-md leading-relaxed"
+            className="font-sans text-sm md:text-base text-text-muted max-w-md leading-relaxed"
             data-hero-bio
             style={{ opacity: 0 }}
           >
@@ -113,21 +107,22 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
           <Link
             href="/menu"
             prefetch={true}
-            className="group relative inline-flex items-center justify-between gap-6 w-fit min-w-[280px] mt-2 px-7 py-5 border border-text-muted hover:border-accent bg-transparent hover:bg-accent transition-all duration-500 overflow-hidden"
+            className="group relative inline-flex items-center justify-between gap-6 w-full sm:w-fit sm:min-w-[280px] mt-2 px-6 md:px-7 py-4 md:py-5 border border-text-muted hover:border-accent bg-transparent hover:bg-accent transition-all duration-500 overflow-hidden"
             data-hero-scroll
             style={{ opacity: 0 }}
           >
-            <span className="font-mono text-[12px] md:text-[13px] uppercase tracking-[0.25em] text-text-primary group-hover:text-bg-primary transition-colors duration-500 relative z-10">
+            <span className="font-mono text-[11px] md:text-[13px] uppercase tracking-[0.25em] text-text-primary group-hover:text-bg-primary transition-colors duration-500 relative z-10">
               Enter the portfolio
             </span>
-            <span className="font-serif text-2xl text-text-primary group-hover:text-bg-primary group-hover:translate-x-1 transition-all duration-500 relative z-10">
+            <span className="font-serif text-xl md:text-2xl text-text-primary group-hover:text-bg-primary group-hover:translate-x-1 transition-all duration-500 relative z-10">
               →
             </span>
           </Link>
         </div>
 
+        {/* Foto — oculta en móvil, visible desde lg */}
         <div
-          className="relative flex flex-col gap-5 w-full"
+          className="hidden lg:flex relative flex-col gap-5 w-full"
           data-hero-photo
           style={{ opacity: 0 }}
         >
@@ -164,42 +159,22 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
             </div>
           </div>
 
-          <div
-            className="flex flex-col gap-2 max-w-[400px] mx-auto lg:mx-0 w-full"
-            data-hero-meta
-            style={{ opacity: 0 }}
-          >
+          <div className="flex flex-col gap-2 max-w-[400px] mx-auto lg:mx-0 w-full">
             <div className="flex items-baseline gap-3 pb-1.5 border-b border-rule">
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">
-                Path
-              </span>
-              <span className="font-sans text-xs text-text-primary">
-                Sevilla · Madrid · Bologna · Washington D.C.
-              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">Path</span>
+              <span className="font-sans text-xs text-text-primary">Sevilla · Madrid · Bologna · Washington D.C.</span>
             </div>
             <div className="flex items-baseline gap-3 pb-1.5 border-b border-rule">
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">
-                Focus
-              </span>
-              <span className="font-sans text-xs text-text-primary">
-                International Business · AI · Emerging Tech
-              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">Focus</span>
+              <span className="font-sans text-xs text-text-primary">International Business · AI · Emerging Tech</span>
             </div>
             <div className="flex items-baseline gap-3 pb-1.5 border-b border-rule">
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">
-                Background
-              </span>
-              <span className="font-sans text-xs text-text-primary">
-                LL.B · Bar-certified (Spain) · MSc (in progress)
-              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">Background</span>
+              <span className="font-sans text-xs text-text-primary">LL.B · Bar-certified (Spain) · MSc (in progress)</span>
             </div>
             <div className="flex items-baseline gap-3">
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">
-                Langs
-              </span>
-              <span className="font-sans text-xs text-text-primary">
-                EN · ES · IT
-              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">Langs</span>
+              <span className="font-sans text-xs text-text-primary">EN · ES · IT</span>
             </div>
           </div>
         </div>

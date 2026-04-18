@@ -1,5 +1,5 @@
 "use client";
-import { useRef, ReactNode } from "react";
+import { useRef, ReactNode, useEffect, useState } from "react";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap } from "@/lib/gsap";
 
@@ -21,6 +21,15 @@ export default function Marquee({
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // Detectar si es dispositivo táctil
+  useEffect(() => {
+    setIsTouchDevice(
+      typeof window !== "undefined" &&
+        ("ontouchstart" in window || navigator.maxTouchPoints > 0)
+    );
+  }, []);
 
   useIsomorphicLayoutEffect(() => {
     const track = trackRef.current;
@@ -49,14 +58,17 @@ export default function Marquee({
     return () => ctx.revert();
   }, [speed]);
 
+  // Solo activamos hover handlers en dispositivos NO táctiles
+  const shouldHandleHover = pauseOnHover && !isTouchDevice;
+
   const handleMouseEnter = () => {
-    if (pauseOnHover && tweenRef.current) {
+    if (shouldHandleHover && tweenRef.current) {
       gsap.to(tweenRef.current, { timeScale: 0, duration: 0.4, ease: "power2.out" });
     }
   };
 
   const handleMouseLeave = () => {
-    if (pauseOnHover && tweenRef.current) {
+    if (shouldHandleHover && tweenRef.current) {
       gsap.to(tweenRef.current, { timeScale: 1, duration: 0.4, ease: "power2.out" });
     }
   };
@@ -64,7 +76,7 @@ export default function Marquee({
   return (
     <div
       ref={containerRef}
-      className={`overflow-hidden ${className}`}
+      className={`relative overflow-hidden ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

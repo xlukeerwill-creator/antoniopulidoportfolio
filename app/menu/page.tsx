@@ -17,7 +17,6 @@ export default function MenuPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // Prefetch agresivo de las 4 rutas
     router.prefetch("/about");
     router.prefetch("/work");
     router.prefetch("/thoughts");
@@ -42,9 +41,8 @@ export default function MenuPage() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen max-h-screen container-x border-t border-rule flex flex-col pt-8 md:pt-10 pb-8 md:pb-10 bg-bg-primary text-text-primary"
+      className="relative min-h-screen lg:h-screen lg:max-h-screen container-x border-t border-rule flex flex-col pt-20 md:pt-10 pb-10 md:pb-10 bg-bg-primary text-text-primary"
     >
-      {/* Back to home */}
       <Link
         href="/"
         className="absolute top-6 left-6 md:top-8 md:left-10 z-40 group font-mono text-[11px] uppercase tracking-[0.25em] text-text-muted hover:text-accent transition-colors duration-500 flex items-center gap-2"
@@ -55,34 +53,32 @@ export default function MenuPage() {
         Back to home
       </Link>
 
-      {/* Cabecera */}
       <div
-        className="grid grid-cols-2 items-baseline pb-4 border-b border-rule shrink-0 mt-16 md:mt-20"
+        className="grid grid-cols-2 items-baseline pb-4 border-b border-rule shrink-0 mt-8 md:mt-20"
         data-menu-el
       >
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-text-muted">
+        <p className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-text-muted">
           Menu
         </p>
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-text-muted text-right">
+        <p className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-text-muted text-right">
           Select a chapter
         </p>
       </div>
 
-      {/* Listado de 4 enlaces */}
-      <nav className="flex-1 min-h-0 flex flex-col justify-center">
+      <nav className="flex-1 min-h-0 flex flex-col justify-start lg:justify-center pt-6 lg:pt-0">
         {entries.map((entry) => (
           <Link
             key={entry.num}
             href={entry.href}
             prefetch={true}
-            className="group relative grid grid-cols-[auto_1fr_auto] gap-6 md:gap-12 items-baseline py-4 md:py-5 border-t border-rule transition-colors duration-500 last:border-b"
+            className="group relative grid grid-cols-[auto_1fr_auto] gap-4 md:gap-12 items-baseline py-5 md:py-5 border-t border-rule transition-colors duration-500 last:border-b"
             data-menu-el
           >
             <span className="font-mono text-xs md:text-sm text-text-dim group-hover:text-accent transition-colors duration-500">
               {entry.num}
             </span>
             <span
-              className={`font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] text-text-primary group-hover:text-accent transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3 md:group-hover:translate-x-6${entry.italic ? " italic" : ""}`}
+              className={`font-serif text-[clamp(2.75rem,7vw,6rem)] leading-[0.95] text-text-primary group-hover:text-accent transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3 md:group-hover:translate-x-6${entry.italic ? " italic" : ""}`}
             >
               {entry.title}
             </span>
