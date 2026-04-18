@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap } from "@/lib/gsap";
 
@@ -93,6 +94,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
           <p
             className="font-serif text-xl md:text-2xl lg:text-3xl text-text-primary max-w-2xl leading-[1.15]"
             data-hero-tag
+            style={{ opacity: 0 }}
           >
             Bridging law, business and technology.
           </p>
@@ -100,6 +102,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
           <p
             className="font-sans text-base text-text-muted max-w-md leading-relaxed"
             data-hero-bio
+            style={{ opacity: 0 }}
           >
             MSc International Business candidate at The George Washington
             University, with a legal background from Spain. Focused on how AI
@@ -107,15 +110,27 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
             the future of professional services.
           </p>
 
-          <div className="flex items-center gap-3" data-hero-scroll>
-            <div className="w-8 h-px bg-text-muted" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted">
-              Scroll to explore
+          <Link
+            href="/menu"
+            prefetch={true}
+            className="group relative inline-flex items-center justify-between gap-6 w-fit min-w-[280px] mt-2 px-7 py-5 border border-text-muted hover:border-accent bg-transparent hover:bg-accent transition-all duration-500 overflow-hidden"
+            data-hero-scroll
+            style={{ opacity: 0 }}
+          >
+            <span className="font-mono text-[12px] md:text-[13px] uppercase tracking-[0.25em] text-text-primary group-hover:text-bg-primary transition-colors duration-500 relative z-10">
+              Enter the portfolio
             </span>
-          </div>
+            <span className="font-serif text-2xl text-text-primary group-hover:text-bg-primary group-hover:translate-x-1 transition-all duration-500 relative z-10">
+              →
+            </span>
+          </Link>
         </div>
 
-        <div className="relative flex flex-col gap-5 w-full" data-hero-photo>
+        <div
+          className="relative flex flex-col gap-5 w-full"
+          data-hero-photo
+          style={{ opacity: 0 }}
+        >
           <div className="relative w-full max-w-[400px] mx-auto lg:mx-0">
             <div
               data-hero-glow
@@ -124,6 +139,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
                 background:
                   "radial-gradient(circle, rgba(235,229,214,0.12) 0%, rgba(139,46,31,0.08) 35%, transparent 70%)",
                 filter: "blur(50px)",
+                opacity: 0,
               }}
             />
 
@@ -151,6 +167,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
           <div
             className="flex flex-col gap-2 max-w-[400px] mx-auto lg:mx-0 w-full"
             data-hero-meta
+            style={{ opacity: 0 }}
           >
             <div className="flex items-baseline gap-3 pb-1.5 border-b border-rule">
               <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim w-24 shrink-0">

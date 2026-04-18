@@ -1,52 +1,14 @@
 "use client";
+import { ReactNode } from "react";
+import Link from "next/link";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-} from "react";
-import { useRouter } from "next/navigation";
-
-type TransitionContextType = {
-  transitionTo: (href: string) => void;
-  isTransitioning: boolean;
-};
-
-const TransitionContext = createContext<TransitionContextType | null>(null);
-
-export const useTransition = () => {
-  const ctx = useContext(TransitionContext);
-  if (!ctx) throw new Error("useTransition must be used within PageTransition");
-  return ctx;
-};
-
+// Componente wrapper que solo existe por compatibilidad — ya no hace transiciones.
+// Mantiene el TransitionLink exportado pero ahora es un <Link> de Next.js.
 export default function PageTransition({ children }: { children: ReactNode }) {
-  const router = useRouter();
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const transitionTo = (href: string) => {
-    if (isTransitioning) return;
-
-    setIsTransitioning(true);
-
-    // navegación limpia
-    router.push(href);
-
-    // reset estado (rápido y fiable)
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "auto" });
-      setIsTransitioning(false);
-    }, 300);
-  };
-
-  return (
-    <TransitionContext.Provider value={{ transitionTo, isTransitioning }}>
-      {children}
-    </TransitionContext.Provider>
-  );
+  return <>{children}</>;
 }
 
+// TransitionLink = alias de Next.js <Link>. Misma API para no tocar el resto del código.
 export function TransitionLink({
   href,
   children,
@@ -56,20 +18,11 @@ export function TransitionLink({
   href: string;
   children: ReactNode;
   className?: string;
+  [key: string]: unknown;
 }) {
-  const { transitionTo } = useTransition();
-
   return (
-    <a
-      href={href}
-      className={className}
-      onClick={(e) => {
-        e.preventDefault();
-        transitionTo(href);
-      }}
-      {...rest}
-    >
+    <Link href={href} className={className} prefetch={true} {...rest}>
       {children}
-    </a>
+    </Link>
   );
 }
