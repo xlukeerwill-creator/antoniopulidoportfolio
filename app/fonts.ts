@@ -1,21 +1,22 @@
-import { Instrument_Serif, Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 
-export const instrumentSerif = Instrument_Serif({
+export const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-serif-var",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
   display: "swap",
 });
 
-export const geist = Geist({
+export const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans-var",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-body",
   display: "swap",
 });
 
-export const geistMono = Geist_Mono({
+export const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-mono-var",
+  weight: ["400", "500"],
+  variable: "--font-mono",
   display: "swap",
 });
