@@ -56,6 +56,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "CGHfnZzpFYLm8rvfafoIz_6ygKTNVPW1MJmdVJidUZI",
+  },
   alternates: {
     canonical: "https://antoniopulidosaez.com",
   },
