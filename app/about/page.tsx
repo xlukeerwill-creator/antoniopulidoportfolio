@@ -167,11 +167,11 @@ export default function AboutPage() {
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-text-dim mb-2">Elsewhere</p>
             <div className="flex items-baseline gap-4 pb-2 border-b border-rule">
               <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Scope</span>
-              <span className="font-sans text-sm text-text-primary">International Business · Strategy · AI</span>
+              <span className="font-sans text-sm text-text-primary">International Business, Strategy, AI</span>
             </div>
             <div className="flex items-baseline gap-4 pb-2 border-b border-rule">
               <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Community</span>
-              <span className="font-sans text-sm text-text-primary">Hispanic Bar Association D.C. · Volunteer in VA</span>
+              <span className="font-sans text-sm text-text-primary">Hispanic Bar Association D.C.</span>
             </div>
             <div className="flex items-baseline gap-4 pb-2 border-b border-rule">
               <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Networks</span>
