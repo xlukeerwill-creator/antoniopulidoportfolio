@@ -174,7 +174,7 @@ export default function AboutPage() {
               <span className="font-sans text-sm text-text-primary">Hispanic Bar Association D.C. · Volunteer in VA</span>
             </div>
             <div className="flex items-baseline gap-4 pb-2 border-b border-rule">
-              <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Sports</span>
+              <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Networks</span>
               <span className="font-sans text-sm text-text-primary">Young Professional Network, Hispanic Chamber D.C</span>
             </div>
             <div className="flex items-baseline gap-4">
