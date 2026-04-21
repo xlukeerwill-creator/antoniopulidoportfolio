@@ -102,4 +102,139 @@ html.lenis body {
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+  }
+  /* ============================================
+   ARTICLE BODY — Prosa editorial premium
+   ============================================ */
+
+.article-body {
+  color: var(--color-text-primary);
+}
+
+.article-body > * + * {
+  margin-top: 1.5em;
+}
+
+.article-body p {
+  line-height: 1.7;
+  font-weight: 400;
+  max-width: 100%;
+}
+
+.article-body p:first-child::first-letter {
+  font-size: 3.5em;
+  font-weight: 400;
+  float: left;
+  line-height: 0.9;
+  padding-right: 0.08em;
+  padding-top: 0.08em;
+  color: var(--color-accent);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.article-body h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-top: 3em;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.01em;
+}
+
+.article-body h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-top: 2.5em;
+  margin-bottom: 0.4em;
+  font-style: italic;
+  color: var(--color-text-primary);
+}
+
+.article-body blockquote {
+  border-left: 2px solid var(--color-accent);
+  padding-left: 1.5rem;
+  margin: 2.5em 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+.article-body blockquote p {
+  margin: 0;
+}
+
+.article-body a {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: all 0.3s ease;
+}
+
+.article-body a:hover {
+  color: var(--color-accent);
+  text-decoration-thickness: 2px;
+}
+
+.article-body strong {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.article-body em {
+  font-style: italic;
+  color: var(--color-text-primary);
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5rem;
+  line-height: 1.7;
+}
+
+.article-body ul > li {
+  list-style: none;
+  position: relative;
+}
+
+.article-body ul > li::before {
+  content: "—";
+  color: var(--color-accent);
+  position: absolute;
+  left: -1.5rem;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body ol > li::marker {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.article-body li + li {
+  margin-top: 0.6em;
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: 3em auto;
+  width: 40%;
+}
+
+.article-body img {
+  width: 100%;
+  height: auto;
+  margin: 2em 0;
+  border-radius: 2px;
 }
