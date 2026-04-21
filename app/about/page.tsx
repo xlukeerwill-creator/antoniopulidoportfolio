@@ -175,7 +175,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-baseline gap-4 pb-2 border-b border-rule">
               <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Sports</span>
-              <span className="font-sans text-sm text-text-primary">Captain — University of Seville Soccer Team</span>
+              <span className="font-sans text-sm text-text-primary">Young Professional Network, Hispanic Chamber D.C</span>
             </div>
             <div className="flex items-baseline gap-4">
               <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Interests</span>
