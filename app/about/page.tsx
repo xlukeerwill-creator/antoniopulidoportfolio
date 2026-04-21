@@ -166,8 +166,8 @@ export default function AboutPage() {
           <div className="flex flex-col gap-3">
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-text-dim mb-2">Elsewhere</p>
             <div className="flex items-baseline gap-4 pb-2 border-b border-rule">
-              <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Leadership</span>
-              <span className="font-sans text-sm text-text-primary">Oxford Certificate · Chief of Staff at MS IB</span>
+              <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Scope</span>
+              <span className="font-sans text-sm text-text-primary">International Business · Strategy · AI</span>
             </div>
             <div className="flex items-baseline gap-4 pb-2 border-b border-rule">
               <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Community</span>
@@ -178,8 +178,8 @@ export default function AboutPage() {
               <span className="font-sans text-sm text-text-primary">Young Professional Network, Hispanic Chamber D.C</span>
             </div>
             <div className="flex items-baseline gap-4">
-              <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Interests</span>
-              <span className="font-sans text-sm text-text-primary">Soccer · Tennis · Travel · Skiing</span>
+              <span className="font-mono text-xs text-text-muted w-20 md:w-24 shrink-0">Writing</span>
+              <span className="font-sans text-sm text-text-primary">Essays at antoniopulidosaez.com/thoughts</span>
             </div>
           </div>
         </div>
