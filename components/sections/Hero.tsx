@@ -83,7 +83,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
 
       <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-20 items-center pt-8 lg:pt-8">
         <div className="flex flex-col gap-5 lg:gap-7">
-          <div
+          <h1
             className="flex flex-col font-serif font-normal leading-[0.88]"
             style={{ fontSize: "clamp(3rem, 10.5vw, 9.5rem)" }}
           >
@@ -98,7 +98,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
                 Sáez.
               </span>
             </div>
-          </div>
+          </h1>
 
           <p
             className="font-serif text-lg md:text-2xl lg:text-3xl text-text-primary max-w-2xl leading-[1.2]"

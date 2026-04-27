@@ -52,7 +52,7 @@ export default function MenuPage() {
         </span>
         Back to home
       </Link>
-
+      <h1 className="sr-only">Portfolio Menu — Antonio Pulido Sáez</h1>
       <div
         className="grid grid-cols-2 items-baseline pb-4 border-b border-rule shrink-0 mt-8 md:mt-20"
         data-menu-el

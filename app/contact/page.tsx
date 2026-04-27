@@ -59,9 +59,9 @@ export default function ContactPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-24 items-end mb-auto">
           <div className="flex flex-col gap-6" data-contact-el>
-            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-text-muted">
+            <h1 className="font-mono text-[11px] uppercase tracking-[0.25em] text-text-muted">
               Drop me a line
-            </p>
+            </h1>
             <a
               href="mailto:antonio.pulidosaez@gwu.edu"
               className="font-serif text-[clamp(1.75rem,5vw,4rem)] leading-[1] text-text-primary hover:text-accent transition-colors duration-500 break-all"
