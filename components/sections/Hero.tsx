@@ -58,12 +58,27 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
       className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col container-x overflow-hidden pt-6 md:pt-8 pb-8 md:pb-8"
     >
       <div className="grid grid-cols-2 items-center pb-4 border-b border-rule shrink-0">
-        <p className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-text-muted">
+        {/* Izquierda: solo en desktop */}
+        <p className="hidden md:block font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted">
           A. Pulido Sáez — Portfolio
         </p>
-        <p className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-text-muted text-right">
-          Washington D.C. · MMXXVI
-        </p>
+        {/* Hueco vacío en móvil para mantener el grid */}
+        <span className="md:hidden" />
+
+        {/* Derecha: en desktop una línea, en móvil dos pequeñas apiladas */}
+        <div className="text-right">
+          <p className="hidden md:block font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted">
+            Washington D.C. · MMXXVI
+          </p>
+          <div className="md:hidden flex flex-col items-end gap-0.5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-muted leading-tight">
+              Washington D.C.
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-dim leading-tight">
+              MMXXVI
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-20 items-center pt-8 lg:pt-8">
