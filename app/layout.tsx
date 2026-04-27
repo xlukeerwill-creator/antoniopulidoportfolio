@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { spaceGrotesk, inter, jetbrainsMono } from "./fonts";
 import "./globals.css";
+import GoogleAnalytics from "@/components/layout/GoogleAnalytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://antoniopulidosaez.com"),
@@ -82,7 +83,10 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <GoogleAnalytics />
+        {children}
+      </body>
     </html>
   );
 }
