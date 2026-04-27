@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { spaceGrotesk, inter, jetbrainsMono } from "./fonts";
 import "./globals.css";
 import GoogleAnalytics from "@/components/layout/GoogleAnalytics";
+import MicrosoftClarity from "@/components/layout/MicrosoftClarity";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://antoniopulidosaez.com"),
@@ -85,6 +86,7 @@ export default function RootLayout({
     >
       <body>
         <GoogleAnalytics />
+        <MicrosoftClarity />
         {children}
       </body>
     </html>
