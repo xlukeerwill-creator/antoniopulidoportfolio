@@ -1,39 +1,30 @@
-"use client";
-import { useState, useEffect, useLayoutEffect } from "react";
-import dynamic from "next/dynamic";
-import Hero from "@/components/sections/Hero";
-
-const Preloader = dynamic(() => import("@/components/preloader/Preloader"), { ssr: false });
-
-const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
-
-let preloaderShownThisSession = false;
+import HomeClient from "./HomeClient";
+import { getAllThoughtsMeta, formatDate } from "@/lib/thoughts";
+import type { LatestEssayData } from "@/components/sections/LatestEssay";
 
 export default function Home() {
-  const [phase, setPhase] = useState<"pending" | "preloader" | "post-preloader" | "returning">("pending");
+  const thoughts = getAllThoughtsMeta();
+  const latest = thoughts[0] ?? null;
 
-  useIsoLayoutEffect(() => {
-    if (preloaderShownThisSession) {
-      setPhase("returning");
-    } else {
-      setPhase("preloader");
-    }
-  }, []);
+  const latestEssay: LatestEssayData | null = latest
+    ? {
+        slug: latest.slug,
+        title: latest.title,
+        subtitle: latest.subtitle,
+        date: latest.date,
+        excerpt: latest.excerpt,
+        cover: latest.cover,
+        tags: latest.tags,
+        readingTime: latest.readingTime,
+      }
+    : null;
 
-  const handlePreloaderComplete = () => {
-    preloaderShownThisSession = true;
-    setPhase("post-preloader");
-  };
+  const latestEssayFormattedDate = latest ? formatDate(latest.date) : "";
 
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary">
-      {phase === "preloader" && <Preloader onComplete={handlePreloaderComplete} />}
-      {phase !== "pending" && phase !== "preloader" && (
-        <Hero
-          startAnimation={phase === "post-preloader"}
-          instantVisible={phase === "returning"}
-        />
-      )}
-    </main>
+    <HomeClient
+      latestEssay={latestEssay}
+      latestEssayFormattedDate={latestEssayFormattedDate}
+    />
   );
 }

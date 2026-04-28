@@ -13,6 +13,13 @@ interface HeroProps {
 export default function Hero({ startAnimation, instantVisible = false }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
+  const handleScrollToLatest = () => {
+    const target = document.getElementById("latest-essay");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       if (instantVisible) {
@@ -22,6 +29,8 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
         gsap.set("[data-hero-tag]", { opacity: 1, y: 0 });
         gsap.set("[data-hero-bio]", { opacity: 1, y: 0 });
         gsap.set("[data-hero-scroll]", { opacity: 1, y: 0 });
+        gsap.set("[data-hero-whatsnew]", { opacity: 1, y: 0 });
+        gsap.set("[data-hero-bottomnav]", { opacity: 1, y: 0 });
         return;
       }
 
@@ -31,6 +40,8 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
       gsap.set("[data-hero-tag]", { opacity: 0, y: 20 });
       gsap.set("[data-hero-bio]", { opacity: 0, y: 20 });
       gsap.set("[data-hero-scroll]", { opacity: 0, y: 10 });
+      gsap.set("[data-hero-whatsnew]", { opacity: 0, y: 15 });
+      gsap.set("[data-hero-bottomnav]", { opacity: 0, y: 30 });
 
       if (!startAnimation) return;
 
@@ -46,7 +57,9 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
         .to("[data-hero-photo]", { opacity: 1, x: 0, scale: 1, duration: 1.4, ease: "power3.out" }, "-=1.6")
         .to("[data-hero-tag]", { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.9")
         .to("[data-hero-bio]", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
-        .to("[data-hero-scroll]", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4");
+        .to("[data-hero-scroll]", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4")
+        .to("[data-hero-whatsnew]", { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.2")
+        .to("[data-hero-bottomnav]", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5");
     }, sectionRef);
 
     return () => ctx.revert();
@@ -55,17 +68,21 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col container-x overflow-hidden pt-6 md:pt-8 pb-8 md:pb-8"
+      className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col container-x overflow-hidden pt-6 md:pt-8 pb-28 md:pb-8 lg:pb-8"
     >
-      <div className="grid grid-cols-2 items-center pb-4 border-b border-rule shrink-0">
-        {/* Izquierda: solo en desktop */}
+      {/* Gradiente vivo de fondo (solo móvil) */}
+      <div
+        className="lg:hidden absolute inset-0 pointer-events-none overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="hero-bg-gradient absolute inset-0" />
+      </div>
+
+      <div className="relative grid grid-cols-2 items-center pb-4 border-b border-rule shrink-0 z-10">
         <p className="hidden md:block font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted">
           A. Pulido Sáez — Portfolio
         </p>
-        {/* Hueco vacío en móvil para mantener el grid */}
         <span className="md:hidden" />
-
-        {/* Derecha: en desktop una línea, en móvil dos pequeñas apiladas */}
         <div className="text-right">
           <p className="hidden md:block font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted">
             Washington D.C. · MMXXVI
@@ -81,7 +98,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-20 items-center pt-8 lg:pt-8">
+      <div className="relative z-10 flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-20 items-center pt-8 lg:pt-8">
         <div className="flex flex-col gap-5 lg:gap-7">
           <h1
             className="flex flex-col font-serif font-normal leading-[0.88]"
@@ -119,23 +136,38 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
             the future of professional services.
           </p>
 
+          {/* Botón "Enter the portfolio" — solo desktop */}
           <Link
             href="/menu"
             prefetch={true}
-            className="group relative inline-flex items-center justify-between gap-6 w-full sm:w-fit sm:min-w-[280px] mt-2 px-6 md:px-7 py-4 md:py-5 border border-text-muted hover:border-accent bg-transparent hover:bg-accent transition-all duration-500 overflow-hidden"
+            className="hidden lg:inline-flex group relative items-center justify-between gap-6 w-full sm:w-fit sm:min-w-[280px] mt-2 px-6 md:px-7 py-4 md:py-5 border border-text-muted hover:border-accent active:border-accent bg-transparent hover:bg-accent active:bg-accent transition-all duration-500 overflow-hidden"
             data-hero-scroll
             style={{ opacity: 0 }}
           >
-            <span className="font-mono text-[11px] md:text-[13px] uppercase tracking-[0.25em] text-text-primary group-hover:text-bg-primary transition-colors duration-500 relative z-10">
+            <span className="font-mono text-[11px] md:text-[13px] uppercase tracking-[0.25em] text-text-primary group-hover:text-bg-primary group-active:text-bg-primary transition-colors duration-500 relative z-10">
               Enter the portfolio
             </span>
-            <span className="font-serif text-xl md:text-2xl text-text-primary group-hover:text-bg-primary group-hover:translate-x-1 transition-all duration-500 relative z-10">
+            <span className="font-serif text-xl md:text-2xl text-text-primary group-hover:text-bg-primary group-active:text-bg-primary group-hover:translate-x-1 group-active:translate-x-1 transition-all duration-500 relative z-10">
               →
             </span>
           </Link>
+
+          {/* What's new — solo móvil — botón con caja burgundy */}
+          <button
+            onClick={handleScrollToLatest}
+            className="lg:hidden mt-6 self-center group relative inline-flex items-center justify-center gap-3 px-7 py-4 border border-accent/40 bg-accent/5 active:bg-accent/15 active:border-accent transition-all duration-300"
+            data-hero-whatsnew
+            style={{ opacity: 0 }}
+            aria-label="Scroll to latest essay"
+          >
+            <span className="font-mono text-[12px] uppercase tracking-[0.3em] text-accent">
+              what&apos;s new
+            </span>
+            <span className="hero-arrow-pulse font-serif text-xl text-accent leading-none">↓</span>
+          </button>
         </div>
 
-        {/* Foto — oculta en móvil, visible desde lg */}
+        {/* Foto desktop — sin cambios */}
         <div
           className="hidden lg:flex relative flex-col gap-5 w-full"
           data-hero-photo
@@ -147,12 +179,11 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
               className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[75%] aspect-square rounded-full pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(235,229,214,0.12) 0%, rgba(139,46,31,0.08) 35%, transparent 70%)",
+                  "radial-gradient(circle, rgba(235,229,214,0.12) 0%, rgba(168,55,31,0.08) 35%, transparent 70%)",
                 filter: "blur(50px)",
                 opacity: 0,
               }}
             />
-
             <div
               className="relative aspect-[3/4] w-full"
               style={{
@@ -194,6 +225,49 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
           </div>
         </div>
       </div>
+
+      {/* Bottom-nav fija — solo móvil, más generosa y con presencia */}
+      <nav
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-bg-primary/90 backdrop-blur-md border-t border-rule"
+        data-hero-bottomnav
+        style={{ opacity: 0 }}
+        aria-label="Quick navigation"
+      >
+        <div className="grid grid-cols-4 gap-0">
+          <Link
+            href="/about"
+            prefetch={true}
+            className="group flex flex-col items-center justify-center gap-1 py-4 active:bg-accent/10 transition-colors"
+          >
+            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-text-dim group-active:text-accent transition-colors">01</span>
+            <span className="font-serif text-base text-text-primary group-active:text-accent transition-colors">About</span>
+          </Link>
+          <Link
+            href="/work"
+            prefetch={true}
+            className="group flex flex-col items-center justify-center gap-1 py-4 active:bg-accent/10 transition-colors border-l border-rule"
+          >
+            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-text-dim group-active:text-accent transition-colors">02</span>
+            <span className="font-serif text-base text-text-primary group-active:text-accent transition-colors">Work</span>
+          </Link>
+          <Link
+            href="/thoughts"
+            prefetch={true}
+            className="group flex flex-col items-center justify-center gap-1 py-4 active:bg-accent/10 transition-colors border-l border-rule"
+          >
+            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-text-dim group-active:text-accent transition-colors">03</span>
+            <span className="font-serif italic text-base text-accent">Thoughts</span>
+          </Link>
+          <Link
+            href="/contact"
+            prefetch={true}
+            className="group flex flex-col items-center justify-center gap-1 py-4 active:bg-accent/10 transition-colors border-l border-rule"
+          >
+            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-text-dim group-active:text-accent transition-colors">04</span>
+            <span className="font-serif text-base text-text-primary group-active:text-accent transition-colors">Contact</span>
+          </Link>
+        </div>
+      </nav>
     </section>
   );
 }

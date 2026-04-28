@@ -16,6 +16,15 @@ export default function MenuPage() {
   const sectionRef = useRef<HTMLElement>(null);
   const router = useRouter();
 
+  // Redirección a / en móvil — la bottom-nav ya cubre esta navegación
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const isMobile = window.matchMedia("(max-width: 1023px)").matches;
+    if (isMobile) {
+      router.replace("/");
+    }
+  }, [router]);
+
   useEffect(() => {
     router.prefetch("/about");
     router.prefetch("/work");
@@ -41,7 +50,7 @@ export default function MenuPage() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen lg:h-screen lg:max-h-screen container-x border-t border-rule flex flex-col pt-20 md:pt-10 pb-10 md:pb-10 bg-bg-primary text-text-primary"
+      className="hidden lg:flex relative min-h-screen lg:h-screen lg:max-h-screen container-x border-t border-rule flex-col pt-20 md:pt-10 pb-10 md:pb-10 bg-bg-primary text-text-primary"
     >
       <Link
         href="/"
@@ -64,7 +73,6 @@ export default function MenuPage() {
           Select a chapter
         </p>
       </div>
-
       <nav className="flex-1 min-h-0 flex flex-col justify-start lg:justify-center pt-6 lg:pt-0">
         {entries.map((entry) => (
           <Link

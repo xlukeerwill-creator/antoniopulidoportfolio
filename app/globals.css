@@ -238,3 +238,54 @@ html.lenis body {
   margin: 2em 0;
   border-radius: 2px;
 }
+/* Hero — gradiente vivo de fondo (solo móvil) */
+.hero-bg-gradient {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 30% 30%,
+      rgba(168, 55, 31, 0.10) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 80% 70%,
+      rgba(235, 229, 214, 0.05) 0%,
+      transparent 55%
+    );
+  animation: heroBgBreathe 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroBgBreathe {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(2%, -1%, 0) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-1%, 1%, 0) scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+/* Flecha pulsante del "what's new" */
+.hero-arrow-pulse {
+  animation: arrowPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+}
+
+/* Bottom-nav: respetar safe area iOS (notch + home indicator) */
+nav[data-hero-bottomnav] {
+  padding-bottom: env(safe-area-inset-bottom);
+}
