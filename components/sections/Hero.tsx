@@ -26,6 +26,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
         gsap.set("[data-hero-line]", { yPercent: 0, opacity: 1 });
         gsap.set("[data-hero-glow]", { opacity: 1 });
         gsap.set("[data-hero-photo]", { opacity: 1, x: 0, scale: 1 });
+        gsap.set("[data-hero-bgmobile]", { opacity: 1, scale: 1 });
         gsap.set("[data-hero-tag]", { opacity: 1, y: 0 });
         gsap.set("[data-hero-bio]", { opacity: 1, y: 0 });
         gsap.set("[data-hero-scroll]", { opacity: 1, y: 0 });
@@ -37,6 +38,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
       gsap.set("[data-hero-line]", { yPercent: 110 });
       gsap.set("[data-hero-glow]", { opacity: 0 });
       gsap.set("[data-hero-photo]", { opacity: 0, x: 30, scale: 0.96 });
+      gsap.set("[data-hero-bgmobile]", { opacity: 0, scale: 1.05 });
       gsap.set("[data-hero-tag]", { opacity: 0, y: 20 });
       gsap.set("[data-hero-bio]", { opacity: 0, y: 20 });
       gsap.set("[data-hero-scroll]", { opacity: 0, y: 10 });
@@ -47,12 +49,18 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
 
       const tl = gsap.timeline({ delay: 0.1 });
 
-      tl.to("[data-hero-line]", {
-        yPercent: 0,
-        duration: 1.1,
-        stagger: 0.14,
-        ease: "power4.out",
+      tl.to("[data-hero-bgmobile]", {
+        opacity: 1,
+        scale: 1,
+        duration: 1.8,
+        ease: "power3.out",
       })
+        .to("[data-hero-line]", {
+          yPercent: 0,
+          duration: 1.1,
+          stagger: 0.14,
+          ease: "power4.out",
+        }, "-=1.4")
         .to("[data-hero-glow]", { opacity: 1, duration: 1.8, ease: "power2.out" }, "-=0.8")
         .to("[data-hero-photo]", { opacity: 1, x: 0, scale: 1, duration: 1.4, ease: "power3.out" }, "-=1.6")
         .to("[data-hero-tag]", { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.9")
@@ -70,12 +78,66 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
       ref={sectionRef}
       className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col container-x overflow-hidden pt-6 md:pt-8 pb-28 md:pb-8 lg:pb-8"
     >
-      {/* Gradiente vivo de fondo (solo móvil) */}
+      {/* Foto difuminada de fondo — solo móvil — lado derecho */}
       <div
-        className="lg:hidden absolute inset-0 pointer-events-none overflow-hidden"
+        className="lg:hidden absolute inset-0 pointer-events-none overflow-hidden z-0"
         aria-hidden="true"
       >
-        <div className="hero-bg-gradient absolute inset-0" />
+        <div
+          className="absolute top-[8%] right-0 h-[92%] w-[65%]"
+          data-hero-bgmobile
+          style={{
+            opacity: 0,
+            WebkitMaskImage:
+              "linear-gradient(to left, #000 50%, rgba(0,0,0,0.85) 75%, transparent 100%)",
+            maskImage:
+              "linear-gradient(to left, #000 50%, rgba(0,0,0,0.85) 75%, transparent 100%)",
+          }}
+        >
+          <div
+            className="relative w-full h-full"
+            style={{
+              filter: "blur(0.5px) saturate(0.95) brightness(0.95) contrast(1.05)",
+            }}
+          >
+            <Image
+              src="/images/antonio-bg-mobile.jpg"
+              alt=""
+              fill
+              priority
+              sizes="65vw"
+              className="object-cover"
+              style={{
+                objectPosition: "55% 22%",
+              }}
+            />
+          </div>
+          {/* Capa burgundy sutil para tintar la foto y casarla con tu paleta */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to left, rgba(168,55,31,0.10) 0%, rgba(168,55,31,0.05) 50%, transparent 100%)",
+              mixBlendMode: "multiply",
+            }}
+          />
+          {/* Capa oscura — más fuerte y extendida para garantizar legibilidad del texto */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to left, rgba(10,10,10,0) 0%, rgba(10,10,10,0.50) 45%, rgba(10,10,10,0.92) 100%)",
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Gradiente vivo de fondo (solo móvil) — debajo de la foto */}
+      <div
+        className="lg:hidden absolute inset-0 pointer-events-none overflow-hidden z-0"
+        aria-hidden="true"
+      >
+        <div className="hero-bg-gradient absolute inset-0 opacity-50" />
       </div>
 
       <div className="relative grid grid-cols-2 items-center pb-4 border-b border-rule shrink-0 z-10">
@@ -98,7 +160,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
         </div>
       </div>
 
-      <div className="relative z-10 flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-20 items-center pt-8 lg:pt-8">
+      <div className="relative z-10 flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-20 items-center pt-4 md:pt-8 lg:pt-8">
         <div className="flex flex-col gap-5 lg:gap-7">
           <h1
             className="flex flex-col font-serif font-normal leading-[0.88]"
@@ -130,10 +192,19 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
             data-hero-bio
             style={{ opacity: 0 }}
           >
-            MSc International Business candidate at The George Washington
-            University, with a legal background from Spain. Focused on how AI
-            and emerging technology are reshaping global business, strategy, and
-            the future of professional services.
+            {/* Versión móvil — más concisa */}
+            <span className="md:hidden">
+              MSc International Business candidate at George Washington
+              University, with a legal background from Spain. Focused on how AI
+              is reshaping global business and professional services.
+            </span>
+            {/* Versión desktop — completa */}
+            <span className="hidden md:inline">
+              MSc International Business candidate at The George Washington
+              University, with a legal background from Spain. Focused on how AI
+              and emerging technology are reshaping global business, strategy, and
+              the future of professional services.
+            </span>
           </p>
 
           {/* Botón "Enter the portfolio" — solo desktop */}
@@ -152,10 +223,10 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
             </span>
           </Link>
 
-          {/* What's new — solo móvil — botón con caja burgundy */}
+          {/* What's new — solo móvil */}
           <button
             onClick={handleScrollToLatest}
-            className="lg:hidden mt-6 self-center group relative inline-flex items-center justify-center gap-3 px-7 py-4 border border-accent/40 bg-accent/5 active:bg-accent/15 active:border-accent transition-all duration-300"
+            className="lg:hidden mt-6 self-center group relative inline-flex items-center justify-center gap-3 px-7 py-4 border border-accent/40 bg-bg-primary/50 backdrop-blur-sm active:bg-accent/15 active:border-accent transition-all duration-300"
             data-hero-whatsnew
             style={{ opacity: 0 }}
             aria-label="Scroll to latest essay"
@@ -226,7 +297,7 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
         </div>
       </div>
 
-      {/* Bottom-nav fija — solo móvil, más generosa y con presencia */}
+      {/* Bottom-nav fija — solo móvil */}
       <nav
         className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-bg-primary/90 backdrop-blur-md border-t border-rule"
         data-hero-bottomnav
