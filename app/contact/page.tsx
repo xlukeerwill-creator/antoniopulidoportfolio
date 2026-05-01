@@ -90,30 +90,11 @@ export default function ContactPage() {
             </div>
             <div className="flex items-center justify-between pb-3 border-b border-rule">
               <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim">
-                GitHub
-              </span>
-              <span className="font-sans text-sm text-text-muted">
-                Coming soon
-              </span>
-            </div>
-            <div className="flex items-center justify-between pb-3 border-b border-rule">
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim">
                 Based in
               </span>
               <span className="font-sans text-sm text-text-primary">
                 Washington, D.C.
               </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-dim">
-                Phone
-              </span>
-              <a
-                href="tel:+12025692838"
-                className="font-sans text-sm text-text-primary hover:text-accent transition-colors"
-              >
-                +1 (202) 569-2838
-              </a>
             </div>
           </div>
         </div>
