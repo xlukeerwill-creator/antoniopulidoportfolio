@@ -93,7 +93,7 @@ export default function ContactPage() {
                 Based in
               </span>
               <span className="font-sans text-sm text-text-primary">
-                Washington, D.C.
+                Sevilla and Washington, D.C.
               </span>
             </div>
           </div>
