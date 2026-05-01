@@ -76,7 +76,8 @@ export default function Hero({ startAnimation, instantVisible = false }: HeroPro
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col container-x overflow-hidden pt-6 md:pt-8 pb-28 md:pb-8 lg:pb-8"
+      className="relative h-screen max-h-screen lg:h-screen lg:max-h-screen flex flex-col container-x overflow-hidden pt-6 md:pt-8 pb-24 md:pb-8 lg:pb-8"
+      style={{ height: "100vh", maxHeight: "100vh" }}
     >
       {/* Foto difuminada de fondo — solo móvil — lado derecho */}
       <div
