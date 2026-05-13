@@ -47,7 +47,7 @@ export default function LatestEssay({ essay, formattedDate }: Props) {
               alt={essay.title}
               fill
               sizes="100vw"
-              className="object-cover group-active:scale-[1.02] transition-transform duration-700"
+              className="object-cover group-active:scale-[1.02] transition-transform duration-700" style={{ objectPosition: "center 70%" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/60 via-transparent to-transparent" />
           </div>

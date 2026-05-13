@@ -112,7 +112,7 @@ export default async function ArticlePage({
                 alt={thought.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 1200px"
-                className="object-cover"
+                className="object-cover" style={{ objectPosition: "center 70%" }}
                 priority
               />
             </div>

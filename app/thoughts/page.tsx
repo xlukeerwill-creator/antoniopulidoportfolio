@@ -54,7 +54,7 @@ export default function ThoughtsPage() {
                 className="group grid grid-cols-[auto_1fr] lg:grid-cols-[auto_1fr_auto] gap-x-6 md:gap-x-12 gap-y-1 items-start py-10 md:py-16 border-t border-rule transition-colors duration-500 lg:hover:bg-bg-secondary lg:px-2 lg:-mx-2"
               >
                 <span className="font-serif italic text-[clamp(1.75rem,4vw,3rem)] text-text-dim leading-none lg:group-hover:text-accent transition-colors duration-500 min-w-[2rem] md:min-w-[3rem] pt-2">
-                  {toRoman(index + 1)}
+                  {toRoman(thoughts.length - index)}
                 </span>
 
                 <div className="flex flex-col gap-3 md:gap-4 max-w-3xl">
