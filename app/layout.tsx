@@ -34,7 +34,7 @@ export const metadata: Metadata = {
       "Spanish lawyer based in Washington D.C. Bridging law, business and technology.",
     images: [
       {
-        url: "/images/antonio-hero.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Antonio Pulido Sáez",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Antonio Pulido Sáez — Portfolio",
     description:
       "Spanish lawyer based in Washington D.C. Bridging law, business and technology.",
-    images: ["/images/antonio-hero.png"],
+    images: ["/og-image.png"],
   },
   icons: {
   icon: [
